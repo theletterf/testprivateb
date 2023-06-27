@@ -15,7 +15,7 @@ env:
 jobs:
   repo-sync:
     name: Synchronize repositories
-    if: ${{ github.repository == 'theletterf/testprivate' || github.repository == 'theletterf/testprivateb' }}
+    if: ${{ github.repository == 'theletterf/test-private' || github.repository == 'theletterf/testprivateb' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
