@@ -28,4 +28,4 @@ jobs:
         github_token: ${{ secrets.MY_TOKEN }}
     - name: Create pull request
       run: |
-         gh pr create -l "sync" -B main --title "Pulling ${{ github.ref }} into main" -H repo-sync -b "This PR synchronizes repos." || gh pr edit -B main
+         gh pr edit -B main || gh pr create -l "sync" -B main --title "Pulling ${{ github.ref }} into main" -H repo-sync -b "This PR synchronizes repos."
