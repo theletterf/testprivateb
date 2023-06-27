@@ -26,6 +26,15 @@ jobs:
         github_token: ${{ secrets.MY_TOKEN }}
     - name: Create pull request
       run: |
-         gh pr create -l "sync" -B main --title "Pulling ${{ github.ref }} into main" -H repo-sync -b "This PR synchronizes repos."
-         errormessage=$( /sbin/modprobe -n -v hfsplus 2>&1)
-         echo $errormessage
+         export LC_ALL=C
+
+         case $(gh pr edit -B repo-sync --title "Pulling ${{ github.ref }} into main" || gh pr create -l "sync" -B main --title "Pulling ${{ github.ref }} into main" -H repo-sync -b "This PR synchronizes repos." 2>&1) in 
+              *"No commits between main and repo-sync"*)
+                  echo >&2 "No commits between main and repo-sync."
+                  exit 78
+                  ;;
+              *"already exists"*)
+                  echo >&2 "Sync PR already exists"
+                  exit 78
+                  ;;
+          esac
