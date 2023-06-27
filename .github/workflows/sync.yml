@@ -31,10 +31,10 @@ jobs:
          case $(gh pr edit -B repo-sync --title "Pulling ${{ github.ref }} into main" || gh pr create -l "sync" -B main --title "Pulling ${{ github.ref }} into main" -H repo-sync -b "This PR synchronizes repos." 2>&1) in 
               *"No commits between main and repo-sync"*)
                   echo >&2 "No commits between main and repo-sync."
-                  exit 78
+                  exit 0
                   ;;
               *"already exists"*)
                   echo >&2 "Sync PR already exists"
-                  exit 78
+                  exit 0
                   ;;
           esac
