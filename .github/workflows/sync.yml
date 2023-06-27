@@ -2,8 +2,6 @@ name: Repo Sync
 
 on:
   workflow_dispatch:
-  schedule: 
-    - cron: "*/5 * * * *"
     
 permissions:
   contents: write
@@ -28,4 +26,4 @@ jobs:
         github_token: ${{ secrets.MY_TOKEN }}
     - name: Create pull request
       run: |
-         gh pr edit --title "Pulling ${{ github.ref }} into main" || gh pr create -l "sync" -B main --title "Pulling ${{ github.ref }} into main" -H repo-sync -b "This PR synchronizes repos."
+         gh pr edit -B repo-sync --title "Pulling ${{ github.ref }} into main" || gh pr create -l "sync" -B main --title "Pulling ${{ github.ref }} into main" -H repo-sync -b "This PR synchronizes repos."
