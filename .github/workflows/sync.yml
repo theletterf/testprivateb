@@ -22,9 +22,9 @@ jobs:
     - uses: repo-sync/github-sync@v2
       name: Sync repo to branch
       with:
-        source_repo: ${{ secrets.SOURCE_REPO }}
+        source_repo: theletterf/test-private
         source_branch: main
-        destination_branch: ${{ secrets.INTERMEDIATE_BRANCH }}
+        destination_branch: repo-sync
         github_token: ${{ secrets.MY_TOKEN }}
     - name: Create pull request
       run: |
